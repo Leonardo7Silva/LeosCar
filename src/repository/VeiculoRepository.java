@@ -25,6 +25,9 @@ public class VeiculoRepository implements repository<Veiculo>{
 
     @Override
     public Veiculo create(Veiculo object) {
+        if(alreadyExist(object)){
+            return null;
+        }
         veiculos.add(object);
         return veiculos.get(veiculos.size() - 1);
     }
@@ -48,5 +51,14 @@ public class VeiculoRepository implements repository<Veiculo>{
         }
 
         return null;
+    }
+
+    private Boolean alreadyExist(Veiculo object){
+        for (Veiculo v : veiculos){
+            if(v.getPlaca().equals(object.getPlaca())){
+                return true;
+            }
+        }
+        return false;
     }
 }

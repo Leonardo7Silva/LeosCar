@@ -33,8 +33,8 @@ public class Main {
         Veiculo veiculo4 = new Veiculo("Soul", "ABC2434", "SUV");
 
         veiculos.create(veiculo1);
-        veiculos.create(veiculo2);
-        veiculos.create(veiculo3);
+        veiculos.create(veiculo1);
+        veiculos.create(veiculo1);
 
         veiculos.delete("ABD1235");
 

@@ -26,6 +26,9 @@ public class PessoaJuridicaRepository implements repository<PessoaJuridica>{
 
     @Override
     public PessoaJuridica create(PessoaJuridica object) {
+        if(alreadyExist(object)){
+            return null;
+        }
         clientes.add(object);
         return clientes.get(clientes.size() - 1);
     }
@@ -47,7 +50,15 @@ public class PessoaJuridicaRepository implements repository<PessoaJuridica>{
                 return clientes.get(i);
             }
         }
-
         return null;
+    }
+
+    private Boolean alreadyExist(PessoaJuridica object){
+        for (PessoaJuridica p : clientes){
+            if(p.getCNPJ().equals(object.getCNPJ())){
+                return true;
+            }
+        }
+        return false;
     }
 }

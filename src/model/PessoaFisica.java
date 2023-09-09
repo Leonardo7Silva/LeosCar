@@ -1,6 +1,8 @@
 package model;
 
-public class PessoaFisica {
+import java.util.Objects;
+
+public class PessoaFisica extends Pessoa{
     private String nome;
     private String CPF;
 
@@ -23,6 +25,13 @@ public class PessoaFisica {
 
     public void setCPF(String CPF) {
         this.CPF = CPF;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PessoaFisica that)) return false;
+        return Objects.equals(CPF, that.CPF);
     }
 
     @Override

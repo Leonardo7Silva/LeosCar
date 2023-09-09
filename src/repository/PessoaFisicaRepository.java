@@ -26,6 +26,9 @@ public class PessoaFisicaRepository implements repository<PessoaFisica>{
 
     @Override
     public PessoaFisica create(PessoaFisica object) {
+        if(alreadyExist(object)){
+            return null;
+        }
         clientes.add(object);
         return clientes.get(clientes.size() - 1);
     }
@@ -50,6 +53,15 @@ public class PessoaFisicaRepository implements repository<PessoaFisica>{
         }
 
         return null;
+    }
+
+    private Boolean alreadyExist(PessoaFisica object) {
+        for (PessoaFisica p : clientes){
+            if(p.getCPF().equals(object.getCPF())){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -6,11 +6,13 @@ public class Veiculo {
     private String modelo;
     private String placa;
     private String tipo;
+    private String status;
 
     public Veiculo(String modelo, String placa, String tipo) {
         this.modelo = modelo;
         this.placa = placa;
         this.tipo = tipo;
+        this.status = "DISPONÍVEL";
     }
 
     public String getModelo() {
@@ -37,12 +39,21 @@ public class Veiculo {
         this.tipo = tipo;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "modelo='" + modelo + '\'' +
                 ", placa='" + placa + '\'' +
                 ", tipo='" + tipo + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }
