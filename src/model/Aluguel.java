@@ -1,20 +1,21 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Aluguel {
     String id;
     Pessoa cliente;
     Veiculo veiculo;
-    Date dataInicio;
-    Date dataEntrega;
+    LocalDateTime dataInicio;
+    LocalDateTime dataEntrega;
     String status;
-    Double valorTotal;
+    String valorTotal;
 
-    Aluguel(Pessoa cliente, Veiculo veiculo) {
+    public Aluguel(Pessoa cliente, Veiculo veiculo) {
         this.cliente = cliente;
         this.veiculo = veiculo;
-        this.dataInicio = new Date();
+        this.dataInicio = LocalDateTime.now();
         this.status = "ABERTO";
     }
 
@@ -42,19 +43,19 @@ public class Aluguel {
         this.veiculo = veiculo;
     }
 
-    public Date getDataInicio() {
+    public LocalDateTime getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(LocalDateTime dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataEntrega() {
+    public LocalDateTime getDataEntrega() {
         return dataEntrega;
     }
 
-    public void setDataEntrega(Date dataEntrega) {
+    public void setDataEntrega(LocalDateTime dataEntrega) {
         this.dataEntrega = dataEntrega;
     }
 
@@ -66,11 +67,11 @@ public class Aluguel {
         this.status = status;
     }
 
-    public Double getValorTotal() {
+    public String getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(Double valorTotal) {
+    public void setValorTotal(String valorTotal) {
         this.valorTotal = valorTotal;
     }
 

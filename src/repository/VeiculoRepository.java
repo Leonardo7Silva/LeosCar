@@ -18,6 +18,16 @@ public class VeiculoRepository implements repository<Veiculo>{
         return null;
     }
 
+    public List<Veiculo> findManyByName(String name) {
+        List<Veiculo> newlist = new ArrayList<>();
+        for (Veiculo v : veiculos){
+            if(v.getPlaca().contains(name)){
+                newlist.add(v);
+            }
+        }
+        return newlist;
+    }
+
     @Override
     public List<Veiculo> findAll() {
         return veiculos;

@@ -1,46 +1,104 @@
+import model.Aluguel;
 import model.PessoaFisica;
 import model.PessoaJuridica;
 import model.Veiculo;
+import repository.AluguelRepository;
 import repository.PessoaFisicaRepository;
 import repository.PessoaJuridicaRepository;
 import repository.VeiculoRepository;
+import service.*;
+
+import java.sql.SQLOutput;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.Scanner;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        PessoaJuridicaRepository ClientesJuridicos = new PessoaJuridicaRepository();
-        PessoaJuridica pessoa1 = new PessoaJuridica("Leo", "1234");
-        PessoaJuridica pessoa2 = new PessoaJuridica("Leo2", "5678");
-        PessoaJuridica pessoa3 = new PessoaJuridica("Leo3", "7980");
-        PessoaJuridica pessoa4 = new PessoaJuridica("Leo4", "8009");
+        VeiculoRepository catalogoDeVeiculos = new VeiculoRepository();
+        PessoaFisicaRepository clientesFisicos = new PessoaFisicaRepository();
+        PessoaJuridicaRepository clientesJuridicos = new PessoaJuridicaRepository();
+        Scanner sc = new Scanner(System.in);
+        Cadastrar cadastrar = new Cadastrar();
+        Listar listar = new Listar();
+        MenuFuncionarios menu = new MenuFuncionarios();
 
-        ClientesJuridicos.create(pessoa1);
-        ClientesJuridicos.create(pessoa2);
-        ClientesJuridicos.create(pessoa3);
+        System.out.println("Bem-vindo ao sistema Leo's Cars");
+        System.out.println();
+        int controle = menu.execute();
+        System.out.println(controle);
+        do {
+            switch (controle) {
+                case 0:
+                    break;
+                case 1:
+                    System.out.println("Cadastrar veículo:");
+                    System.out.println("digite o modelo do veículo:");
+                    String modelo = sc.next();
+                    System.out.println("digite a placa:");
+                    String placa = sc.next();
+                    System.out.println("digite o tipo:");
+                    String tipo = sc.next().toUpperCase();
+                    if (listar.oneVeiculo(catalogoDeVeiculos, placa) != null) {
+                        System.out.println("Não é possível completar essa ação pôr:" + "Veículo existente!");
+                        controle = desejaContinuar();
+                        break;
+                    }
+                    Veiculo newVeiculo = new Veiculo(modelo, placa, tipo);
+                    System.out.println(cadastrar.cadastrarVeiculos(catalogoDeVeiculos, newVeiculo).toString());
+                    controle = desejaContinuar();
 
-        ClientesJuridicos.delete("5678");
+                case 2:
+                    System.out.println("Cadastrar cliente físico:");
+                    System.out.println("digite seu nome:");
+                    String nome = sc.nextLine();
+                    System.out.println("digite seu CPF:");
+                    String cpf = sc.next();
+                    if (listar.onePessoasFisicas(clientesFisicos, cpf) != null) {
+                        System.out.println("Não é possível completar essa ação pôr:" + "Cliente existente!");
+                        controle = desejaContinuar();
+                        break;
+                    }
+                    PessoaFisica newCliente = new PessoaFisica(nome, cpf);
+                    System.out.println(cadastrar.cadastrarPessoasFisicas(clientesFisicos, newCliente).toString());
+                    controle = desejaContinuar();
 
-        ClientesJuridicos.update("7980", pessoa4);
+                case 3:
+                    System.out.println("Cadastrar cliente jurídico:");
+                    System.out.println("digite seu nome fantasia:");
+                    String nomeFantasia = sc.nextLine();
+                    System.out.println("digite seu CNPJ:");
+                    String cnpj = sc.next();
+                    if (listar.onePessoasJuridicas(clientesJuridicos, cnpj) != null) {
+                        System.out.println("Não é possível completar essa ação pôr:" + "Cliente existente!");
+                        controle = desejaContinuar();
+                        break;
+                    }
+                    PessoaJuridica newClienteJuridico = new PessoaJuridica(nomeFantasia, cnpj);
+                    System.out.println(cadastrar.cadastrarPessoasJuridica(clientesJuridicos, newClienteJuridico).toString());
+                    controle = desejaContinuar();
+            }
+        }while (controle != 0);
 
-        System.out.println(ClientesJuridicos.findOne("1234"));
+        System.out.println("Volte Sempre!");
 
-        VeiculoRepository veiculos = new VeiculoRepository();
+    }
+    private static int desejaContinuar(){
+        Scanner scanner = new Scanner(System.in);
+        MenuFuncionarios menu = new MenuFuncionarios();
 
-        Veiculo veiculo1 = new Veiculo("Gol", "ABC1234", "SUV");
-        Veiculo veiculo2 = new Veiculo("Uno", "ABD1235", "Pequeno");
-        Veiculo veiculo3 = new Veiculo("Renegade", "ABE1230", "Medio");
-        Veiculo veiculo4 = new Veiculo("Soul", "ABC2434", "SUV");
-
-        veiculos.create(veiculo1);
-        veiculos.create(veiculo1);
-        veiculos.create(veiculo1);
-
-        veiculos.delete("ABD1235");
-
-        veiculos.update("ABE1230", veiculo4);
-
-        System.out.println(veiculos.findAll());
-
+        System.out.println("Ação finalizada!");
+        System.out.println();
+        System.out.println("Deseja executar outra ação? S/N");
+        String resposta = scanner.next();
+        if(resposta.equalsIgnoreCase("S")){
+            int controle = menu.execute();
+            return controle;
+        }
+        else return 0;
     }
 }

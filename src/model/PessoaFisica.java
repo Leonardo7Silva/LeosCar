@@ -34,6 +34,7 @@ public class PessoaFisica extends Pessoa{
         return Objects.equals(CPF, that.CPF);
     }
 
+
     @Override
     public String toString() {
         return "{" +
@@ -41,4 +42,5 @@ public class PessoaFisica extends Pessoa{
                 ", CPF='" + CPF + '\'' +
                 '}';
     }
+
 }
