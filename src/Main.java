@@ -1,3 +1,4 @@
+import model.Aluguel;
 import model.PessoaFisica;
 import model.PessoaJuridica;
 import model.Veiculo;
@@ -10,8 +11,6 @@ import service.*;
 
 import java.util.Scanner;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
         VeiculoRepository catalogoDeVeiculos = new VeiculoRepository();
@@ -23,6 +22,7 @@ public class Main {
         Listar listar = new Listar();
         Alterar alterar = new Alterar();
         Alugar alugar = new Alugar();
+        Devolver devolver = new Devolver();
         MenuFuncionarios menu = new MenuFuncionarios();
 
         System.out.println("Bem-vindo ao sistema Leo's Cars");
@@ -198,6 +198,36 @@ public class Main {
                         break;
                     }
                     System.out.println(alugar.pessoaJuridica(pessoaJuridica1,veiculo2, listaAlugueis));
+                    controle = desejaContinuar();
+                    break;
+
+                case 10:
+                    System.out.println("Devolução de pessoa física:");
+                    System.out.println("digite o id do aluguél");
+                    String id = sc.next();
+                    Aluguel aluguel = listar.oneAluguel(listaAlugueis, id);
+                    if(aluguel == null){
+                        System.out.println("Não é possível completar essa ação pôr: " + "Aluguel inexistente");
+                        controle = desejaContinuar();
+                        break;
+                    }
+                    System.out.println(devolver.devolucao(aluguel, "física"));
+                    System.out.println("Valor total: " + aluguel.getValorTotal());
+                    controle = desejaContinuar();
+                    break;
+
+                case 11:
+                    System.out.println("Devolução de pessoa jurídica:");
+                    System.out.println("digite o id do aluguel");
+                    String id1 = sc.next();
+                    Aluguel aluguel1 = listar.oneAluguel(listaAlugueis, id1);
+                    if(aluguel1 == null){
+                        System.out.println("Não é possível completar essa ação pôr: " + "Aluguel inexistente");
+                        controle = desejaContinuar();
+                        break;
+                    }
+                    System.out.println(devolver.devolucao(aluguel1, "jurídica"));
+                    System.out.println("Valor total: " + aluguel1.getValorTotal());
                     controle = desejaContinuar();
                     break;
             }

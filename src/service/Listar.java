@@ -1,8 +1,10 @@
 package service;
 
+import model.Aluguel;
 import model.PessoaFisica;
 import model.PessoaJuridica;
 import model.Veiculo;
+import repository.AluguelRepository;
 import repository.PessoaFisicaRepository;
 import repository.PessoaJuridicaRepository;
 import repository.VeiculoRepository;
@@ -35,6 +37,14 @@ public class Listar {
     }
     public PessoaJuridica onePessoasJuridicas(PessoaJuridicaRepository repository, String CNPJ){
         return repository.findOne(CNPJ);
+    }
+
+    public List<Aluguel> allAlugueis(AluguelRepository repository){
+        return repository.findAll();
+    }
+
+    public Aluguel oneAluguel(AluguelRepository repository, String id){
+        return repository.findOne(id);
     }
 
 }
