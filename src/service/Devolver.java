@@ -18,7 +18,7 @@ public class Devolver {
         if (horasDecorridas % 24 != 0) {
             diarias++;
         }
-        if (aluguel.getVeiculo().getTipo().equals("PEQUENO")) {
+        if (aluguel.getVeiculo().getTipo().equalsIgnoreCase("PEQUENO")) {
             double total = diarias * 100;
             if(tipoPessoa.equalsIgnoreCase("física")){
                 total = descontoFisica(diarias, total);
@@ -28,7 +28,7 @@ public class Devolver {
             }
             aluguel.setValorTotal(String.valueOf(total));
         }
-        if (aluguel.getVeiculo().getTipo().equals("MÉDIO")) {
+        if (aluguel.getVeiculo().getTipo().equalsIgnoreCase("MÉDIO")) {
             double total = diarias * 150;
             if(tipoPessoa.equalsIgnoreCase("física")){
                 total = descontoFisica(diarias, total);
@@ -38,7 +38,7 @@ public class Devolver {
             }
             aluguel.setValorTotal(String.valueOf(total));
         }
-        if (aluguel.getVeiculo().getTipo().equals("SUV")) {
+        if (aluguel.getVeiculo().getTipo().equalsIgnoreCase("SUV")) {
             double total = diarias * 200;
             if(tipoPessoa.equalsIgnoreCase("física")){
                 total = descontoFisica(diarias, total);

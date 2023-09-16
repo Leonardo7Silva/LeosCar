@@ -23,7 +23,13 @@ public class Main {
         Alterar alterar = new Alterar();
         Alugar alugar = new Alugar();
         Devolver devolver = new Devolver();
+        Semear semear = new Semear();
         MenuFuncionarios menu = new MenuFuncionarios();
+
+        semear.semearVeiculos(catalogoDeVeiculos);
+        semear.semearPessoasFisicas(clientesFisicos);
+        semear.semearPessoasJuridicas(clientesJuridicos);
+        semear.semearAlugueis(listaAlugueis,clientesFisicos,clientesJuridicos,catalogoDeVeiculos);
 
         System.out.println("Bem-vindo ao sistema Leo's Cars");
         System.out.println();
@@ -211,6 +217,11 @@ public class Main {
                         controle = desejaContinuar();
                         break;
                     }
+                    if(aluguel.getStatus().equalsIgnoreCase("CONCLUÍDO")){
+                        System.out.println("Não é possível completar essa ação pôr: " + "Aluguel já concluído");
+                        controle = desejaContinuar();
+                        break;
+                    }
                     System.out.println(devolver.devolucao(aluguel, "física"));
                     System.out.println("Valor total: " + aluguel.getValorTotal());
                     controle = desejaContinuar();
@@ -226,8 +237,41 @@ public class Main {
                         controle = desejaContinuar();
                         break;
                     }
+                    if(aluguel1.getStatus().equalsIgnoreCase("CONCLUÍDO")){
+                        System.out.println("Não é possível completar essa ação pôr: " + "Aluguel já concluído");
+                        controle = desejaContinuar();
+                        break;
+                    }
                     System.out.println(devolver.devolucao(aluguel1, "jurídica"));
                     System.out.println("Valor total: " + aluguel1.getValorTotal());
+                    controle = desejaContinuar();
+                    break;
+
+                case 12:
+                    System.out.println("Listar Veículos:");
+                    System.out.println("Aqui estão todos os nossos veículos");
+                    System.out.println(listar.allVeiculos(catalogoDeVeiculos));
+                    controle = desejaContinuar();
+                    break;
+
+                case 13:
+                    System.out.println("Listar Clientes Físicos:");
+                    System.out.println("Aqui estão todos os nossos clientes físicos");
+                    System.out.println(listar.allPessoasFisicas(clientesFisicos));
+                    controle = desejaContinuar();
+                    break;
+
+                case 14:
+                    System.out.println("Listar Clientes Jurídicos:");
+                    System.out.println("Aqui estão todos os nossos clientes jurídicos");
+                    System.out.println(listar.allPessoasJuridicas(clientesJuridicos));
+                    controle = desejaContinuar();
+                    break;
+
+                case 15:
+                    System.out.println("Listar Aluguéis:");
+                    System.out.println("Aqui estão todos os nossos cadastros de aluguéis");
+                    System.out.println(listar.allAlugueis(listaAlugueis));
                     controle = desejaContinuar();
                     break;
             }

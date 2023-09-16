@@ -17,6 +17,11 @@ public class MenuFuncionarios {
         System.out.println("9 - Alugar um veículo para pessoa Juridica");
         System.out.println("10 - Devolução de um veículo de uma pessoa Física");
         System.out.println("11 - Devolução de um veículo de uma pessoa Juridica");
+        System.out.println("12 - Listar veículos");
+        System.out.println("13 - Listar clientes físicos");
+        System.out.println("14 - Listar clientes jurídicos");
+        System.out.println("15 - Listar Aluguéis");
+
 
         Scanner sc = new Scanner(System.in);
         return sc.nextInt();
