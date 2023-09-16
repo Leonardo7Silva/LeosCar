@@ -21,7 +21,7 @@ public class VeiculoRepository implements repository<Veiculo>{
     public List<Veiculo> findManyByName(String name) {
         List<Veiculo> newlist = new ArrayList<>();
         for (Veiculo v : veiculos){
-            if(v.getPlaca().contains(name)){
+            if(v.getModelo().contains(name)){
                 newlist.add(v);
             }
         }
